@@ -42,46 +42,47 @@
 \renewcommand{\ttdefault}{lmtt} % safer monospace font
 
 % ==========================
-% Title formatting
-% ==========================
-\makeatletter
-\renewcommand{\maketitle}{%
-  \begin{center}
-    \normalsize \bfseries \@title \\
-    \vspace{0pt}
-    \normalsize \@author \\
-    \vspace{0pt}
-    \normalsize \@date
-  \end{center}
-}
-
-\makeatother
-
-\titleformat{\section}{\normalfont\bfseries}{\thesection}{1em}{}
-\titlespacing{\section}{0pt}{0pt}{0pt}
-
-\titleformat{\subsection}{\normalfont\bfseries}{\thesubsection}{.7em}{}
-\titlespacing{\subsection}{0pt}{0pt}{0pt}
-
-\titleformat{\subsubsection}{\normalfont\bfseries}{\thesubsubsection}{.6em}{}
-\titlespacing{\subsubsection}{0pt}{0pt}{0pt}
-
-% ==========================
-% Page spacing modes
+% Page spacing modes (moved defs here for correct ifx evaluation)
 % ==========================
 \def\uopml@onepage{onepage}
 \def\uopml@apa{apa}
 
+% ==========================
+% Title formatting
+% ==========================
+\makeatletter
+
 \ifx\uopml@mode\uopml@onepage
+  % One Page style title formatting
+  % set margins to 75in so that we have approximately 500
+  % words that fit on the first page in 3 paragrpah with headings
+  \geometry{margin=0.75in}
+
+  \renewcommand{\maketitle}{%
+    \begin{center}
+      \normalsize \bfseries \@title \\
+      \vspace{0pt}
+      \normalsize \@author \\
+      \vspace{0pt}
+      \normalsize \@date
+    \end{center}
+  }
   \singlespacing
+  \titleformat{\section}{\normalfont\bfseries}{\thesection}{1em}{}
+  \titleformat{\subsection}{\normalfont\bfseries}{\thesubsection}{.7em}{}
+  \titleformat{\subsubsection}{\normalfont\bfseries}{\thesubsubsection}{.6em}{}
   \titlespacing{\section}{0pt}{3pt}{3pt}
   \titlespacing{\subsection}{0pt}{3pt}{3pt}
   \titlespacing{\subsubsection}{0pt}{3pt}{3pt}
   \pagestyle{empty}
 \else
+  % APA style title formatting
   \onehalfspacing
   \pagestyle{plain}
+
 \fi
+\makeatother
+
 
 % ==========================
 % Appendix customization
