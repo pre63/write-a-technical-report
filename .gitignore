@@ -1,0 +1,12 @@
+solutions
+
+# tex files
+*.out
+*.log
+*.aux
+*.toc
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
