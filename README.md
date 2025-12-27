@@ -1,28 +1,35 @@
 # Writing a Technical Report (CS 4407)
 
-A technical report in data science or machine learning summarizes an experiment, analysis, or model development, focusing on key insights from data handling, modeling, and evaluation. Limit your report to one page, single-spaced, to enforce conciseness—prioritize the most critical elements, as not all methodological steps, findings, or data aspects are equally important. Select what advances the core objective, such as highlighting pivotal decisions that impacted outcomes over minor details. Use TeX formatting for equations like \(E=mc^2\) where necessary. There are 3 sections to include in your report: Introduction, Methodology, Results. [An example report is provided here](example/report.pdf) and the [associated code here](example/code.r).
+A technical report in data science or machine learning summarizes an experiment, analysis, or model development, focusing on key insights from data handling, modeling, and evaluation. We want you to focus on good justification and analysis of your work, which requires critical thinking. This excersise is designed to support the follwoing course learning outcomes.
 
-## Introduction
+## Learning Outcomes
+1. Implement simple supervised learning, reinforcement learning, and unsupervised learning examples using R.
+1. Understand a range of machine learning algorithms along with their strengths and weaknesses.
+1. Understand the basic operation of machine learning algorithms including decision trees, neural networks, K nearest neighbors, K means clustering, and regression.
+1. Be able to apply machine learning algorithms to solve simple problems.
+
+## Report Guidelines
+Limit your report to one page, single-spaced, to enforce conciseness—prioritize the most critical elements, as not all methodological steps, findings, or data aspects are equally important. Select what advances the core objective, such as highlighting pivotal decisions that impacted outcomes over minor details. Students shoudl put the references list on page 2 and may include illustrations, screenshots, and supporting assets on page 3. Use TeX formatting for equations like \(E=mc^2\) where necessary. There are 3 sections to include in your report: Introduction, Methodology, Results. [An example report is provided here](example/report.pdf) and the [associated code here](example/code.r).
+
+### Introduction
 Start with a paragraph (3-5 sentences) defining the project's aim, like predicting outcomes from a dataset or optimizing a machine learning model. Specify the data source (e.g., a built-in dataset like mtcars for classification tasks) and key features used, along with expected results (e.g., achieving 85% accuracy in classification). Relate it to real-world applications, such as improving recommendation systems, to make the purpose relatable and demonstrate why the work matters in data-driven decision-making.
 
-## Methodology
+### Methodology
 Describe your approach in 4-6 sentences, emphasizing essential tools and steps. For instance, outline libraries like nnet for model training or dplyr for data preprocessing, and explain the model architecture (e.g., a random forest with 100 trees via randomForest or a neural network with two hidden layers of 64 units each using ReLU activation). Justify choices based on the problem's needs—e.g., selecting cross-validation to handle small datasets and prevent overfitting—focusing on decisions that significantly influenced performance rather than exhaustive listings.
 
-## Results
+### Results
 Analyze outcomes in 4-6 sentences, centering on primary metrics like accuracy, precision, recall, or RMSE, and interpret their implications (e.g., a model with high recall but low precision indicates effective detection but many false positives in fraud analysis). Discuss key findings, such as how feature engineering improved results by 15%, and suggest targeted improvements, like tuning hyperparameters differently to address overfitting. Prioritize insights that reveal the project's strengths and limitations, ensuring the discussion ties back to the introduction's goals for a cohesive narrative.
 
+
 ## Grading Rubric
-Your report will be graded out of 10 points based on the following criteria. The rubric emphasizes clarity, conciseness, and technical depth.
+Your report will be graded out of 10 points with possible bonuses for exceeding expectations in key areas, based on the following criteria (if the total exceeds 10 points, it will be capped at 10). The rubric emphasizes justification of methodological choices, in-depth discussion of results, clarity, conciseness, and technical depth.
 
-| Criteria                  | Description                                                                 | Points |
-|---------------------------|-----------------------------------------------------------------------------|--------|
-| **Structure and Conciseness**  | Report is exactly one page, single-spaced, with clear headings for Introduction, Methodology, and Results. Proper use of TeX for equations if applicable. Writing is professional, concise, and free of errors. Prioritizes critical elements without unnecessary information. | 2     |
-| **Introduction**          | Clearly defines the project's aim, specifies data source and key features, states expected results, and relates to real-world applications. Demonstrates understanding of the experiment's purpose (3-5 sentences). | 2     |
-| **Methodology**           | Describes tools, steps, and model architecture in 4-6 sentences. Provides strong justification for choices (e.g., why methods and parameters). Focuses on decisions impacting performance, allowing for replicability. | 2     |
-| **Results**               | Analyzes key metrics and interprets implications in 4-6 sentences. Discusses findings, strengths, limitations, and targeted improvements. Ties back to introduction for cohesion. | 2     |
-| **Technical Depth and Accuracy** | Technical content is accurate, demonstrates unit-relevant knowledge, and provides good depth in explanations. | 2     |
-
----
+| Level                         | Structure, Intro, Conciseness, Depth & Accuracy                                                                 | Methodology                                                                 | Results                                                                     |
+|-------------------------------|------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| **Does Not Meet**            | Lacks clear organization; exceeds length limits; introduction incomplete or absent; content inaccurate or overly simplistic **(0 points)**. | Methods mentioned by name only, without details or justification **(0 points)**.    | Outcomes stated vaguely, without specifics or evidence **(0 points)**.          |
+| **Partially Meets**          | Covers basics unevenly; minor inaccuracies or wordiness; explanations lack depth or miss key elements **(1 point)**. | Outlines steps at surface level; some choices unexplained or unjustified **(1 point)**. | Summarizes findings broadly; omits key metrics, comparisons, or insights **(1 point)**. |
+| **Meets**                    | Follows required format tightly; introduction comprehensive; content precise with unit-appropriate depth and accuracy **(2 points)**.      | Details procedures clearly; justifies major decisions with supporting evidence **(2-4 points)**. | Analyzes key metrics thoroughly; interprets implications and notes strengths/weaknesses **(2-4 points)**. |
+| **Exceeds**                  | Exceptional organization and brevity; introduction engaging; integrates advanced concepts, equations, and real-world ties **(3 points)**. | Explores techniques in depth with quantitative support, equations, and innovative justification **(5 points)**. | Delves into outcomes quantitatively; discusses equations, broader impacts, and novel insights **(5 points)**. |
 
 ## Experiments
 For each unit of the course here are targeted experiments you may choose to write a report on. The experiments below are there to help you get started, but feel free to design your own experiments as well. It's good to use topics related to the unit and show your understanding of the material, but it is not a requirement. It's best to choose an experiment you are genuinely interested in. If you are not sure if your experiment is appropriate please ask me.

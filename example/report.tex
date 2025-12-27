@@ -1,36 +1,12 @@
-\documentclass{article}
-\usepackage{amsmath}
-\usepackage{setspace}
-\usepackage{geometry}
-\usepackage{titlesec}
-\usepackage{natbib} 
-\geometry{margin=1in}
+\documentclass[onepage]{uopml}
 
 \title{Logistic Regression for BMI Classification in Women Dataset}
 \author{Simon Green}
 \date{December 26, 2025}
 
-\makeatletter
-\renewcommand{\maketitle}{%
-  \begin{center}
-    \normalsize \bfseries \@title \\
-    \vspace{6pt}
-    \normalsize \@author \\
-    \vspace{6pt}
-    \normalsize \@date
-  \end{center}
-  \vspace{6pt} % Minimal spacing under title block
-}
-\makeatother
-
-\titleformat{\section}{\normalfont\bfseries}{\thesection}{1em}{}
-\titlespacing{\section}{0pt}{6pt}{6pt} % Minimal spacing around sections
-
 \begin{document}
 
 \maketitle
-
-\singlespacing
 
 \section*{Introduction}
 This experiment implements logistic regression to classify Body Mass Index (BMI) categories using the built-in \textit{women} dataset which includes height (inches) and weight (pounds) for 15 individuals as key input features \citep{mcneil, james}. BMI is calculated and binarized into low ($BMI < 23$, label 0) or high ($BMI \geq 23$, label 1) categories, creating a balanced split (10 low, 5 high) \citep{cdc}. The aim is to assess if a linear classifier can separate these categories effectively in the feature space, with expected high accuracy given the low dimensionality and direct BMI relationship.
@@ -41,7 +17,82 @@ Data preprocessing computed BMI via the formula \( BMI = \frac{\text{weight} \ti
 \section*{Results}
 The model achieved 100\% training accuracy but 75\% on the test set, indicating strong fit to seen data yet moderate generalization, likely due to the tiny sample size amplifying variance. Coefficients showed a large positive intercept (2845.67), negative height effect (-92.26), and positive weight effect (23.00), with extreme standard errors signaling perfect separation in training—where the linear boundary fully divides classes, causing estimates to approach infinity. Suggest that this experiment is a good exercise in methods, but is not realistic in terms of real population but rather representative of sample data and is overfitted. Precision and recall were perfect on training but imply potential false positives/negatives on test, underscoring limitations in small datasets. Future improvements could include regularization with \textit{glmnet} to curb separation issues or cross-validation for better hyperparameter tuning. Overall, the experiment confirms logistic regression's efficacy as an interpretable baseline for health metrics, meeting the introduction's goals while revealing scale-related issues.
 
-\bibliographystyle{apalike}
 \bibliography{references}
+
+\appendix
+\section{Code}
+
+\begin{codeblock}
+# Code generated with Grok
+# Load the women dataset
+data(women)
+
+# Calculate BMI
+women$bmi <- (women$weight * 703) / (women$height ^ 2)
+
+# Assign binary labels: 0 for BMI < 23 (low), 1 for BMI >= 23 (high)
+women$label <- ifelse(women$bmi < 23, 0, 1)
+
+# Set seed for reproducibility
+set.seed(42)
+
+# Shuffle indices
+indices <- sample(1:nrow(women))
+
+# 70/30 train-test split (11 train, 4 test)
+train_indices <- indices[1:11]
+test_indices <- indices[12:15]
+
+train_data <- women[train_indices, ]
+test_data <- women[test_indices, ]
+
+# Train logistic regression model
+model <- glm(label ~ height + weight, data = train_data, family = binomial)
+
+# Predict on training set
+train_pred_prob <- predict(model, train_data, type = "response")
+train_pred <- ifelse(train_pred_prob > 0.5, 1, 0)
+
+# Training accuracy
+train_accuracy <- mean(train_pred == train_data$label)
+cat("Training Accuracy:", train_accuracy, "\n")
+
+# Predict on test set
+test_pred_prob <- predict(model, test_data, type = "response")
+test_pred <- ifelse(test_pred_prob > 0.5, 1, 0)
+
+# Test accuracy
+test_accuracy <- mean(test_pred == test_data$label)
+cat("Test Accuracy:", test_accuracy, "\n")
+
+# Model summary for coefficients and interpretation
+summary(model)
+\end{codeblock}
+
+\section{Outputs}
+\begin{codeblock}
+Training Accuracy: 1 
+Test Accuracy: 0.75 
+
+glm(formula = label ~ height + weight, family = binomial, data = train_data)
+
+Coefficients:
+              Estimate Std. Error z value Pr(>|z|)
+(Intercept)    2845.67 6497124.41       0        1
+height          -92.26  225294.59       0        1
+weight           23.00   60207.54       0        1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1.4421e+01  on 10  degrees of freedom
+Residual deviance: 3.3249e-10  on  8  degrees of freedom
+AIC: 6
+
+Number of Fisher Scoring iterations: 25
+\end{codeblock}
+
+\section{R Studio}
+\insertfigure{assets/r_studio_screenshot.png}{R Studio Environment with Code and Output}{fig:r_studio}
+
 
 \end{document}

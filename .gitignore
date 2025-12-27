@@ -10,3 +10,4 @@ solutions
 *.fdb_latexmk
 *.fls
 *.synctex.gz
+.DS_Store
